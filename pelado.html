@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="{block:English}en{/block:English}{block:French}fr{/block:French}{block:German}de{/block:German}{block:Japanese}ja{/block:Japanese}{block:Italian}it{/block:Italian}{block:Spanish}es{/block:Spanish}{block:Polish}pl{/block:Polish}{block:PortugueseBR}pt-br{/block:PortugueseBR}{block:PortuguesePT}pt{/block:PortuguesePT}">
+<head>
+
+	<meta charset="utf-8">
+
+	<title>{Title} {block:SearchPage}({lang:Search results for SearchQuery}){/block:SearchPage} {block:PermalinkPage}{block:PostSummary} ‹ {PostSummary}{/block:PostSummary}{/block:PermalinkPage}</title>
+	<meta name="description" content="{block:IndexPage}{block:Description}{MetaDescription}{/block:Description}{/block:IndexPage}{block:PermalinkPage}{block:PostSummary}{PostSummary}{/block:PostSummary}{/block:PermalinkPage}">
+
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+	<meta name="author" content="{text:Blog Author}">
+
+	<!-- SERVICES -->
+	<meta name="text:Disqus Shortname" content="">
+	<meta name="text:Google Analytics ID" content="">
+	<meta name="text:TypeKit ID" content="">
+
+	<!-- COLORS -->
+	<meta name="color:Text" content="#333">
+	<meta name="color:Background" content="#eee">
+
+	<!-- DEFAULTS -->
+	<meta name="if:Show Archive" content="1">
+
+	<link rel="shortcut icon" href="{Favicon}">
+	<link rel="alternate" type="application/rss+xml" title="{Title} RSS" href="{RSS}">
+
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
+	<style type="text/css">
+	/* ==========================================================================
+	   Main Styles
+	   ========================================================================== */
+
+	body {
+		color: {color:Text};
+		background: {color:Background};
+	}
+
+	/* Search Form */
+
+	.search {}
+
+	/* Clearfix */
+
+	.cf:before,
+	.cf:after {
+		content: "";
+		display: table;
+	}
+
+	.cf:after {
+		clear: both;
+	}
+
+
+	/* ==========================================================================
+	   Posts
+	   ========================================================================== */
+
+	.posts {}
+
+	/* Post
+	   ========================================================================== */
+
+	.post {}
+
+	/* Post Types
+	   ========================================================================== */
+
+	.text {}
+
+	.photo {}
+
+	.photoset {}
+
+	.quote {}
+
+	.link {}
+
+	.video {}
+
+	.audio {}
+
+	.chat {}
+
+	/* ==========================================================================
+	   Custom CSS
+	   ========================================================================== */
+
+	{CustomCSS}
+	</style>
+
+
+	<!-- Fonts -->
+	{block:IfTypeKitID}
+	<script type="text/javascript" src="//use.typekit.net/{text:TypeKit ID}.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	{/block:IfTypeKitID}
+
+
+	<!--[if lt IE 9]>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+	<![endif]-->
+
+</head>
+
+<body class="{block:IndexPage}blog{/block:IndexPage}">
+
+	<header role="banner" class="header">
+
+		<h1>
+			<a href="{BlogURL}" title="{lang:Home}">{Title}</a>
+		</h1>
+
+		{block:ShowDescription}
+			<p class="description">{Description}</p>
+		{/block:ShowDescription}
+
+		{block:HasPages}
+			<nav role="navigation" class="nav">
+				<ul>
+					{block:Pages}
+						<li>
+							<a href="{URL}">{Label}</a>
+						</li>
+					{/block:Pages}
+					{block:AskEnabled}
+						<li>
+							<a href="/ask">{AskLabel}</a>
+						</li>
+					{/block:AskEnabled}
+					{block:IfShowArchive}
+						<li>
+							<a href="/archive">{lang:Archive}</a>
+						</li>
+					{/block:IfShowArchive}
+				</ul>
+			</nav>
+		{/block:HasPages}
+
+		<form action="/search" method="get" class="search">
+			<input type="text" name="q" value="{SearchQuery}">
+			<input type="submit" value="{lang:Search}">
+		</form>
+
+	</header>
+
+	<main role="main" class="posts {block:PermalinkPage}permalink{/block:PermalinkPage}">
+
+		<header>
+			{block:TagPage}
+				<h2>{lang:Posts tagged Tag 2}</h2>
+			{/block:TagPage}
+			{block:DayPage}
+				<h2>{lang:Posted on DayOfMonth Month Year}</h2>
+			{/block:DayPage}
+		</header>
+
+		{block:Posts}
+			<article class="post {block:IndexPage}indexpage{/block:IndexPage} {block:Permalink}permalink{/block:Permalink} {PostType} {TagsAsClasses}">
+
+				{block:Text}
+					{block:Title}
+						<h1><a href="{Permalink}">{Title}</a></h1>
+					{/block:Title}
+					{Body}
+					{block:More}
+						<a href="{Permalink}" class="readmore">{lang:Continue reading}</a>
+					{/block:More}
+				{/block:Text}
+
+				{block:Photo}
+					<figure>
+						{LinkOpenTag}<img src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{LinkCloseTag}
+						{block:Caption}<figcaption class="caption">{Caption}</div>{/block:Caption}
+					</figure>
+				{/block:Photo}
+
+				{block:Panorama}
+					<figure>
+						{LinkOpenTag}<img src="{PhotoURL-Panorama}" alt="{PhotoAlt}" width="{PhotoWidth-Panorama}" height="{PhotoHeight-Panorama}">{LinkCloseTag}
+						{block:Caption}<figcaption class="caption">{Caption}</div>{/block:Caption}
+					</figure>
+				{/block:Panorama}
+
+				{block:Photoset}
+					<figure>
+						{Photoset}
+						{block:Caption}<figcaption class="caption">{Caption}</div>{/block:Caption}
+					</figure>
+				{/block:Photoset}
+
+				{block:Quote}
+					<blockquote>
+						{Quote}
+						{block:Source}
+							<footer>&mdash; <cite>{Source}</cite></footer>
+						{/block:Source}
+					</blockquote>
+				{/block:Quote}
+
+				{block:Link}
+					<a href="{URL}" {Target}>{Name}</a>
+					{block:Description}
+						{Description}
+					{/block:Description}
+				{/block:Link}
+
+				{block:Video}
+					<div class="video-container">
+						{VideoEmbed-700}
+					</div>
+					{block:Caption}
+						{Caption}
+					{/block:Caption}
+				{/block:Video}
+
+				{block:Chat}
+					{block:Title}
+						<h1><a href="{Permalink}">{Title}</a></h1>
+					{/block:Title}
+					<ul class="cf">
+						{block:Lines}
+							<li class="chat-{Alt}">{block:Label}<span class="label">{Label}</span>{/block:Label} {Line}</li>
+						{/block:Lines}
+					</ul>
+				{/block:Chat}
+
+				{block:Audio}
+					<div class="audioplayer">
+						{block:AudioEmbed}
+							{AudioEmbed color="black"}
+						{block:AudioEmbed}
+					</div>
+					{block:Caption}
+						<div class="caption">{Caption}</div>
+					{/block:Caption}
+				{/block:Audio}
+
+				{block:Answer}
+					<cite class="asker">{Asker}:</cite>
+					<blockquote class="question">{Question}</blockuote>
+					<div class="answer">{Answer}</div>
+				{/block:Answer}
+
+				{block:Date}
+					<ul class="cf">
+						<li><a href="{Permalink}" title="{TimeAgo}">{Month} {DayOfMonth}, {Year}</a></li>
+						{block:HasTags}
+							<li class="tags">
+								{block:Tags}
+									<a href="{TagURL}">{Tag}</a>
+								{/block:Tags}
+							</li>
+						{/block:HasTags}
+						<li>
+							{ReblogButton color="black" size="16"}
+							{LikeButton color="black" size="16"}
+						</li>
+					</ul>
+				{/block:Date}
+
+			</article>
+		{/block:Posts}
+
+		{block:IndexPage}
+			{block:Pagination}
+				<footer class="pagination cf">
+					{block:NextPage}
+						<a class="page-next" href="{NextPage}">Next Page</a>
+					{/block:NextPage}
+					{block:PreviousPage}
+						<a class="page-prev" href="{PreviousPage}">Previous Page</a>
+					{/block:PreviousPage}
+				</footer>
+			{/block:Pagination}
+		{/block:IndexPage}
+
+		{block:Posts}
+			{block:Date}
+				{block:PermalinkPage}
+					{block:PostNotes}
+						<footer id="notes" class="{block:IfNotDisqusShortname}no-disqus{/block:IfNotDisqusShortname}">
+							{PostNotes-64}
+						</footer>
+					{/block:PostNotes}
+					{block:IfDisqusShortname}
+						<div id="disqus_thread"></div>
+						<script>
+						var disqus_shortname = '{text:Disqus Shortname}';
+						(function() {
+						var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+						dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+						(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+						})();
+						</script>
+					{/block:IfDisqusShortname}
+				{/block:PermalinkPage}
+			{/block:Date}
+		{/block:Posts}
+
+	</main>
+
+	{block:IfGoogleAnalyticsID}
+	<script>
+	(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+	function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+	e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+	e.src='//www.google-analytics.com/analytics.js';
+	r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+	ga('create','{text:Google Analytics ID}');ga('send','pageview');
+	</script>
+	{/block:IfGoogleAnalyticsID}
+
+</body>
+</html>
